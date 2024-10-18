@@ -5,10 +5,21 @@ export const cartSlice = createSlice({
   initialState: [],
   reducers: {
     addTocart: (state, action) => {
-      state.push(action.payload);
+      const existingProduct = state.find(
+        (product) => product.id === action.payload.id
+      );
+      if (existingProduct) {
+        existingProduct.quantity++;
+      } else {
+        state.push({ ...action.payload, quantity: 1 });
+      }
     },
-    removeFromCart: (state, action) => {},
-    clearCart: (state, action) => {}
+    removeFromCart: (state, action) => {
+      return state.filter((proudct) => proudct.id !== action.payload.id);
+    },
+    clearCart: (state, action) => {
+      return [];
+    }
   }
 });
 export const { addTocart, removeFromCart, clearCart } = cartSlice.actions;
