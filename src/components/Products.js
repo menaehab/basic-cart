@@ -4,7 +4,7 @@ import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../rtk/slices/products-slice";
-
+import { addTocart } from "../rtk/slices/cart-slice";
 function Products() {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.products);
@@ -54,7 +54,11 @@ function Products() {
                     <Card.Title>{truncate(product.title, 30)}</Card.Title>
                     <Card.Text>{truncate(product.description, 50)}</Card.Text>
                   </div>
-                  <Button variant="primary" style={{ alignSelf: "center" }}>
+                  <Button
+                    variant="primary"
+                    onClick={() => dispatch(addTocart(product))}
+                    style={{ alignSelf: "center" }}
+                  >
                     Buy Now
                   </Button>
                 </Card.Body>

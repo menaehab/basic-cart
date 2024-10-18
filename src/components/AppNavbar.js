@@ -4,8 +4,10 @@ import Navbar from "react-bootstrap/Navbar";
 import { Link } from "react-router-dom";
 import Products from "./Products";
 import Cart from "./Cart";
+import { useSelector } from "react-redux";
 
 function AppNavbar() {
+  const cart = useSelector((state) => state.cart);
   return (
     <Navbar expand="lg" className="bg-body-tertiary">
       <Container>
@@ -19,7 +21,7 @@ function AppNavbar() {
               Home
             </Link>
             <Link className="nav-link" to="/cart" element={<Cart />}>
-              Cart
+              Cart ({cart.length})
             </Link>
           </Nav>
         </Navbar.Collapse>
